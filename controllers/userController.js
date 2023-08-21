@@ -5,7 +5,7 @@ module.exports = {
   // Get all users
   async getUsers(req, res) {
     try {
-      const users = await user.find();
+      const users = await User.find();
 
       res.json(users);
     } catch (err) {
@@ -16,7 +16,7 @@ module.exports = {
   // Get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await user.findOne({ _id: req.params.userId })
+      const user = await User.findOne({ _id: req.params.userId })
         .select('-__v');
 
       if (!user) {
@@ -32,7 +32,7 @@ module.exports = {
   // create a new user
   async createUser(req, res) {
     try {
-      const user = await user.create(req.body);
+      const user = await User.create(req.body);
       res.json(user);
     } catch (err) {
       res.status(500).json(err);
@@ -41,7 +41,7 @@ module.exports = {
   // Delete a user
   async deleteUser(req, res) {
     try {
-      const user = await user.findOneAndRemove({ _id: req.params.userId });
+      const user = await User.findOneAndRemove({ _id: req.params.userId });
 
       if (!user) {
         return res.status(404).json({ message: 'No such user exists' });
@@ -56,7 +56,7 @@ module.exports = {
   // Add an assignment to a user
   async updateUser(req, res) {
     try {
-      const user = await user.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $set: req.body},
         { new: true }
@@ -76,7 +76,7 @@ module.exports = {
 
   async addNewFriend(req, res) {
     try {
-      const user = await user.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $addtoset: {friends: req.body.friendId} },
         { new: true }

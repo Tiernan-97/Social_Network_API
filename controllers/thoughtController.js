@@ -33,7 +33,7 @@ module.exports = {
 
       User.findOneAndUpdate(
         { _id: req.body.UserId },
-        { $addtoset: { thoughts: req.body.thoughtId } },
+        { $addtoset: { thoughts: thought._id } },
         { new: true }
       );
       res.json(thought);
@@ -48,6 +48,11 @@ module.exports = {
       const thought = await Thought.findOneAndDelete({
         _id: req.params.ThoughtId,
       });
+
+      const userData = User.findOneAndUpdate(
+        {thoughts: req.params.thoughtID},
+        {$pull: {thoughts: req.params.thoughtId}},
+        {new: true});
 
       if (!thought) {
         res.status(404).json({ message: "No Thought with that ID" });
