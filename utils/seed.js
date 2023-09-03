@@ -1,6 +1,6 @@
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
-const { getRandomThought, getRandomUser } = require('./data')
+const { getRandomThought, getRandomUser, getRandomReaction } = require('./data')
 
 
 connection.on('error', (err) => err);
@@ -52,6 +52,17 @@ connection.once('open', async () => {
             { new:true }
         )
     }
+
+    // for (let i = 0; i <5; i++) {
+    //     const thought = getRandomThought(i);
+
+    //     const newReaction = await Thought.insertOne({
+    //         reaction: getRandomReaction(i),
+
+    //     })
+
+        
+    // }
 
     console.info('Seeding complete! 🌱');
     process.exit(0);

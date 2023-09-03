@@ -53,7 +53,7 @@ module.exports = {
     }
   },
 
-  // Add an assignment to a user
+  // update a user
   async updateUser(req, res) {
     try {
       const user = await User.findOneAndUpdate(

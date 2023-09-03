@@ -25,4 +25,15 @@ const getRandomThought = (i) => {
     return thoughts[i]
 }
 
-module.exports = {getRandomThought, getRandomUser};
+// const getRandomReaction = (i) => {
+//     const reactions = [
+//         "that is good",
+//         "that is bad",
+//         "that's alright",
+//         "that's terrible",
+//         "just awful"
+//     ]
+//     return reactions[i]
+// }
+
+module.exports = {getRandomThought, getRandomUser, getRandomReaction};
